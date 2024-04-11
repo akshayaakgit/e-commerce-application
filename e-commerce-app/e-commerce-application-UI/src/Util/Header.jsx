@@ -8,7 +8,6 @@ import Seller from "../Assets/becomeaseller.png";
 import Register from "../Assets/register.png";
 import Option from "../Assets/options.png";
 
-
 const Header = () => {
   return (
     // <div className='flex item-center justify-around bg-blue-900 text-slate-100'>
@@ -18,14 +17,16 @@ const Header = () => {
     // </div>
     <header className="bg-gray-300 text-gray-700">
       <div className="container mx-auto py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <img
-            src="https://img.icons8.com/color/48/000000/open-box.png"
-            alt="Flipkart Logo"
-            className="h-8"
-          />
-          <h1 className="font-semibold text-lg">E kart</h1>
-        </div>
+        <Link to="/">
+          <div className="flex items-center space-x-4">
+            <img
+              src="https://img.icons8.com/color/48/000000/open-box.png"
+              alt="Flipkart Logo"
+              className="h-8"
+            />
+            <h1 className="font-semibold text-lg">E kart</h1>
+          </div>
+        </Link>
         <div className="w-16"></div> {/* Spacer */}
         <div className="flex-grow">
           <input
@@ -79,12 +80,7 @@ const Header = () => {
           </div>
         </div>
         <div className="w-16"></div>
-        <Link to="/cart" className="hover:text-gray-900 flex items-center">
-          <img src={Seller} alt="Become a Seller" className="h-5 w-5" />
-          <h1 className="font-semibold text-lg">Cart</h1>
-        </Link>
-        <div className="w-16"></div>
-        <Link to="/seller" className="hover:text-gray-900 flex items-center">
+        <Link to="/register" className="hover:text-gray-900 flex items-center">
           <img src={Seller} alt="Become a Seller" className="h-5 w-5" />
           <h1 className="font-semibold text-lg">Become a Seller</h1>
         </Link>
