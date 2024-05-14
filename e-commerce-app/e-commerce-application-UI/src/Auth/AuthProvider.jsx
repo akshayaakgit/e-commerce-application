@@ -1,24 +1,43 @@
-import React,{createContext,useContext,useState} from 'react'
+import React, {useState,useContext,createContext, useEffect } from 'react'
+import RefreshAuth from './RefreshAuth'
 
-//Context holding the auth user details
-export const authContext=createContext({})
+//context holding the auth user details
+export const authContext=createContext({});
 
-const AuthProvider = ({child}) => {
- const [user,setUser]=useState({
-    userId: "123",
-    userName: "akshaya",
-    accessexpiration: 3600,
-    refreshexpiration: 1296000,
-    authenticated: false,
-    role: "CUSTOMER"
-  })
-  return(
-      //returning the AuthContext with valuse user and setUser
-      //by enclosing the child component within it
-      <authContext.Provider value={{user, setUser}}>{child}</authContext.Provider>
+//compponents that returns the AuthContext by enclosing its child components within the context
+const AuthProvider = ({children}) => {
+  const {Auth}=RefreshAuth()
+    const [user,setUser]=useState({
+        userId:0,
+        username:"",
+        userRole:"CUSTOMER",
+        authenticated: false,
+        accessExpiration:0,
+        refershExpiration:0
+    })
+
+    // const [addressData, setAddressData] = useState({
+    //   streetAddress: "",
+    //   streetAddressAdditional: "",
+    //   city: "",
+    //   state: "",
+    //   pincode: "",
+    //   addressType: ""
+    // });
+    //console.log(authContext)
+    useEffect(()=>{
+      console.log(Auth);
+      setUser(Auth);
+    },[Auth])
+  return (
+    //returing the Authcontext  with values "user" and "setUser"
+    //by enclosing the child components within it.
+    //<div>   
+    <authContext.Provider value={{user,setUser}}>{children}</authContext.Provider>
+  
   )
 }
 
 export default AuthProvider
-//custom hook that returns the context value
-export const useAuth = () => useContext(authContext);
+
+export const useAuth=()=>useContext(authContext);

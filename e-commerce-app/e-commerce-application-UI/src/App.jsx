@@ -1,14 +1,20 @@
+
 import React from 'react'
 import Header from './Util/Header'
-import {Outlet} from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
-const App = () => {
+
+
+
+export const App = () => {
   return (
     <div>
       <Header/>
+      <div>
         <Outlet/>
+      </div>
+      
     </div>
   )
 }
-
 export default App

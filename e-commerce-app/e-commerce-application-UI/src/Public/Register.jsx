@@ -1,128 +1,3 @@
-// import React,{useEffect,useState} from "react";
-// import axios from "axios";
-// import Input from "../Util/Input.jsx";
-// import Button from "../Util/Button.jsx";
-
-// const Register = ({ role }) => {
-//   const [formData, setFormData] = useState({
-//     displayName: "",
-//     email: "",
-//     password: "",
-//     userRole: role
-//   });
-//   const handleInputChange = (name, value) => {
-//     if (name === "displayName") setFormData({ ...formData, displayName: value });
-//     if (name === "email") setFormData({ ...formData, email: value });
-//     if (name === "password") setFormData({ ...formData, password: value });
-//   };
-//   const handleSubmit = async () => {
-//     alert("Submitted");
-//     console.log(formData);
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:8080/api/vl/register",
-//         formData,
-//         {
-//           headers: {
-//             "Content-Type": "application/json"
-//           }
-//         }
-//       );
-//       if (response.status === "202") {
-//         alert(response.data.message);
-//       }
-//     } catch (error) {
-//       alert(error.response.data.rootCause);
-//     }
-//   };
-//   return (
-//     // <div class="grid grid-rows-3 grid-flow-col gap-4">
-//     //   <div className="flex justify-center items-center h-screen bg-gray-100">
-//     //     <div className="bg-white p-8 rounded-lg shadow-lg">
-//     //       <h2 className="text-2xl font-semibold mb-4">
-//     //         Create an account {role}
-//     //       </h2>
-//     //       <form>
-//     //         <div className="mb-4">
-//     //           <label htmlFor="name" className="block text-gray-700">
-//     //             Name
-//     //           </label>
-//     //           <input
-//     //             type="text"
-//     //             id="name"
-//     //             name="name"
-//     //             className="w-full border rounded-md px-4 py-2 mt-2 focus:outline-none focus:border-blue-500"
-//     //           />
-//     //         </div>
-//     //         <div className="mb-4">
-//     //           <label htmlFor="email" className="block text-gray-700">
-//     //             Email
-//     //           </label>
-//     //           <input
-//     //             type="email"
-//     //             id="email"
-//     //             name="email"
-//     //             className="w-full border rounded-md px-4 py-2 mt-2 focus:outline-none focus:border-blue-500"
-//     //           />
-//     //         </div>
-//     //         <div className="mb-4">
-//     //           <label htmlFor="password" className="block text-gray-700">
-//     //             Password
-//     //           </label>
-//     //           <input
-//     //             type="password"
-//     //             id="password"
-//     //             name="password"
-//     //             className="w-full border rounded-md px-4 py-2 mt-2 focus:outline-none focus:border-blue-500"
-//     //           />
-//     //         </div>
-//     //         <button
-//     //           type="submit"
-//     //           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-//     //         >
-//     //           Sign Up
-//     //         </button>
-//     //       </form>
-//     //     </div>
-//     //   </div>
-//     // </div>
-//     <div className="h-5/6 flex justify-center items-center bg-transparent">
-//      <div className="flex flex-col justify-center items-center border-2 px-10 py-8 w-5/12 rounded-mdbg-white shadow-Ig mt-20">
-//         <h1 className="text-3x1text-slate-700 font-semibold mb-8">
-//           Register as {role}
-//         </h1>
-//         <Input
-//           onChange={handleInputChange}
-//           name={"displayName"}
-//           placeholder={"Enter your name: "}
-//           value={formData.displayName}
-//           type={"text"}
-//         />
-//         <Input
-//           onChange={handleInputChange}
-//           name={"email"}
-//           placeholder={"Enter your email: "}
-//           value={formData.email}
-//           type={"email"}
-//         />
-//         <Input
-//           onChange={handleInputChange}
-//           name={"password"}
-//           placeholder={"Enter your Password: "}
-//           value={formData.password}
-//           type={"password"}
-//         />
-//         <Button
-//         text={"submit"}
-//         onClick={handleSubmit}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Register;
-
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -154,7 +29,7 @@ const Register = (props) => {
     setPassword(inputValue);
 
     // At least 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character
-    const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     setIsValidPassword(passwordRegex.test(inputValue));
   };  
 
@@ -169,7 +44,7 @@ const Register = (props) => {
     const formData={ name:username, email:email, password:password, userRole:props.role  }
     if(isValidEmail&&isValidPassword && formData)
     {
-      setSubmitButton(true)     ;
+      setSubmitButton(true);
     
       
       console.log(formData);
