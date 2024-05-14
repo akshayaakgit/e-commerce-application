@@ -1,19 +1,18 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUser } from '@fortawesome/free-solid-svg-icons'; // Solid style icons
 // import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
 import { IoMdLogIn } from "react-icons/io";
 import { SlOptionsVertical } from "react-icons/sl";
-import LoginIcon from "../Assets/loginlogo.png";
 import { FaRegUserCircle } from "react-icons/fa";
 import Seller from "../Assets/becomeaseller.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { MdAddToPhotos } from "react-icons/md";
-import { IoIosSearch } from "react-icons/io";
-import Option from "../Assets/options.png";
-import { useAuth } from "../Auth/AuthProvider";
+import { useAuth } from "../auth/AuthProvider";
+import Logout from "../Public/Logout";
 
 // const user = {
 //   userId: "123",
@@ -23,11 +22,29 @@ import { useAuth } from "../Auth/AuthProvider";
 //   authenticated: false,
 //   role: "SELLER"
 // };
-
+// const Logout = () => {
+//   try {
+//     // Send registration request to the backend server
+//     const response = axios.post(
+//       "http://localhost:8080/api/vl/logout",
+//       {},
+//       {
+//         headers: { "Content-Type": "application/json" },
+//         withCredentials: "true"
+//       }
+//     );  
+//     alert(response);
+//     navigate("/");
+//     window.location.reload();
+//   } catch (error) {
+//     console.error("Message:", error);
+//   }
+// };
 
 const Header = () => {
   const {user}=useAuth();
-  const { role, authenticated, userName } = user;
+  //console.log(user);
+  const { userRole, authenticated, username } = user;
   return (
     <header className="bg-gray-300 text-gray-700">
       <div className="container mx-auto py-4 flex justify-between items-center">
@@ -49,11 +66,11 @@ const Header = () => {
             className="bg-gray-200 px-2 py-1 rounded-full w-80 focus:outline-none focus:bg-white"
           /> 
         </div>
-        {authenticated && role == "CUSTOMER" ? (
+        {authenticated && userRole == "CUSTOMER" ? (
           <div class="relative group flex items-center space-x-4">
             <HeaderLink
               icon={<FaRegUserCircle />}
-              name={userName}
+              name={username}
               to={"/user"}
             ></HeaderLink>
             <HeaderLink
@@ -67,7 +84,7 @@ const Header = () => {
               to={"/wishlist"}
             ></HeaderLink>
           </div>
-        ) : authenticated && role == "SELLER" ? (
+        ) : authenticated && userRole == "SELLER" ? (
           <div class="relative group flex items-center space-x-4">
             <HeaderLink
               icon={<FaRegUserCircle />}
@@ -118,7 +135,7 @@ const Header = () => {
                       <Link to="/settings" class="text-sm">
                         Settings
                       </Link>
-                    </li>
+                    </li>                  
                   </ul>
                 </div>
               </div>
@@ -155,6 +172,11 @@ const Header = () => {
                   About us
                 </Link>
               </li>
+              <li class="block px-4 py-2 hover:bg-gray-100">
+                      <Link onClick={Logout} class="text-sm">
+                        Logout
+                      </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -172,3 +194,4 @@ const HeaderLink = ({ icon, name, to }) => {
     </Link>
   );
 };
+

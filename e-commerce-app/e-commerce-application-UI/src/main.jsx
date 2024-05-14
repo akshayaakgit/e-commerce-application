@@ -1,16 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AllRoutes from "./Routes/AllRoutes.jsx";
-import AuthProvider from "./Auth/AuthProvider.jsx";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AllRoutes from './Routes/AllRoutes.jsx'
+import AuthProvider, { authContext } from './auth/AuthProvider';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <AuthProvider child={ <AllRoutes />} />
-    
+       <AuthProvider children={<AllRoutes/>} />      
     </BrowserRouter>
-  </React.StrictMode>
-);
+  </React.StrictMode>,
+)
